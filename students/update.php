@@ -29,14 +29,14 @@ $student->course = $data->course;
 // Update student data
 if($student->update()){
     echo '{';
-        echo '"message": "Course was created."';
+        echo '"message": "Student data updated."';
     echo '}';
 }
  
 // if unable to create the product, tell the user
 else{
     echo '{';
-        echo '"message": "Unable to create product."';
+        echo '"message": "Unable to update student."';
     echo '}';
 }
 ?>

@@ -68,6 +68,7 @@ class Courses{
         $this->cid=htmlspecialchars(strip_tags($this->cid));
         $this->cname=htmlspecialchars(strip_tags($this->cname));
         $this->cduration=htmlspecialchars(strip_tags($this->cduration));
+        
     // bind values
         $stmt->bindParam(":cid", $this->cid);
         $stmt->bindParam(":cname", $this->cname);
