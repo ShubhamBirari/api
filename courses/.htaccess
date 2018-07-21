@@ -1,4 +1,4 @@
 RewriteEngine On    # Turn on the rewriting engine
 RewriteRule ^create/?$ create.php [NC,L]
 RewriteRule ^read/?$ read.php [NC,L]
-RewriteRule ^read_one/cid/([0-9]+)/?$ read_one.php?cid=$1 [NC,L]
+RewriteRule ^read_one?$ read_one.php [NC,L]
