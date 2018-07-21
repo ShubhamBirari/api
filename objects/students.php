@@ -86,6 +86,9 @@ class Students{
 
     function delete(){
         // query to delete record
+        
+       // $sql = "delete from from course_master"; 
+       // $result = mysqli_query($db, $sql);
             $query  = "Delete from ".$this->table_name." WHERE id=:id";
 
         //prepare query 

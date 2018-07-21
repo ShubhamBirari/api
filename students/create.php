@@ -27,7 +27,7 @@ $student->course = $data->course;
 // create the product
 if($student->create()){
     echo '{';
-        echo '"message": "Course was created."';
+        echo '"message": "Student data inserted."';
     echo '}';
 }
  

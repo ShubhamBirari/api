@@ -27,14 +27,14 @@ $student->id = $data->id;
 // Update student data
 if($student->delete()){
     echo '{';
-        echo '"message": "Course was created."';
+        echo '"message": "Student data deleted"';
     echo '}';
 }
  
 // if unable to create the product, tell the user
 else{
     echo '{';
-        echo '"message": "Unable to create product."';
+        echo '"message": "Unable to delete student data"';
     echo '}';
 }
 ?>
