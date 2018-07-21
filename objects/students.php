@@ -45,8 +45,8 @@ class Students{
         $this->name=htmlspecialchars(strip_tags($this->name));
         $this->courses=htmlspecialchars(strip_tags($this->course));
     // bind values
-        $stmt->bindParam(":cname", $this->name);
-        $stmt->bindParam(":cduration", $this->course);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":course", $this->course);
  
     // execute query
         if($stmt->execute()){
