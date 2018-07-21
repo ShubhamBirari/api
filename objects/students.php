@@ -57,6 +57,33 @@ class Students{
      
     }
 
+    function update(){
+        // query to insert record
+        $query = "UPDATE " . $this->table_name . " SET name=:name, course=:course WHERE id = :id";
+ 
+    // prepare query
+        $stmt = $this->conn->prepare($query);
+ 
+    // sanitize
+        $this->id=htmlspecialchars(strip_tags($this->id));
+        $this->name=htmlspecialchars(strip_tags($this->name));
+        $this->course=htmlspecialchars(strip_tags($this->course));
+    // bind values
+        $stmt->bindParam(":id", $this->id);
+        $stmt->bindParam(":name", $this->name);
+        $stmt->bindParam(":course", $this->course);
+ 
+    // execute query
+        if($stmt->execute()){
+            return true;
+        }
+ 
+        return false;      
+    }
+    
+    
+    
+
     function delete(){
         // query to delete record
             $query  = "Delete from ".$this->table_name." WHERE id=:id";

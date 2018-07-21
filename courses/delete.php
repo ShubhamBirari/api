@@ -2,7 +2,7 @@
 // required headers
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json; charset=UTF-8");
-header("Access-Control-Allow-Methods: POST");
+header("Access-Control-Allow-Methods: DELETE");
 header("Access-Control-Max-Age: 3600");
 header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
  
@@ -20,21 +20,20 @@ $course = new Courses($db);
 // get posted data
 $data = json_decode(file_get_contents("php://input"));
  
-// set product property values
-$course->cname = $data->cname;
-$course->cduration = $data->cduration;
+// set course property values
+$course->cid = $data->cid;
  
-// create the product
-if($course->create()){
+//Add new course details
+if($course->delete()){
     echo '{';
-        echo '"message": "Course data inserted"';
+        echo '"message": "Data deleted."';
     echo '}';
 }
  
 // if unable to create the product, tell the user
 else{
     echo '{';
-        echo '"message": "Unable to insert data"';
+        echo '"message": "Unable to delete data."';
     echo '}';
 }
 ?>

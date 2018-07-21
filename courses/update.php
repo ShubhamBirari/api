@@ -21,20 +21,21 @@ $course = new Courses($db);
 $data = json_decode(file_get_contents("php://input"));
  
 // set product property values
+$course->cid = $data->cid;
 $course->cname = $data->cname;
 $course->cduration = $data->cduration;
  
 // create the product
-if($course->create()){
+if($course->update()){
     echo '{';
-        echo '"message": "Course data inserted"';
+        echo '"message": "Data updated."';
     echo '}';
 }
  
 // if unable to create the product, tell the user
 else{
     echo '{';
-        echo '"message": "Unable to insert data"';
+        echo '"message": "Unable to update data."';
     echo '}';
 }
 ?>

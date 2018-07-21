@@ -56,6 +56,33 @@ class Courses{
         return false;
      
     }
+    
+    function update(){
+        // query to insert record
+        $query = "UPDATE " . $this->table_name . " SET cname=:cname, cduration=:cduration WHERE cid = :cid";
+ 
+    // prepare query
+        $stmt = $this->conn->prepare($query);
+ 
+    // sanitize
+        $this->cid=htmlspecialchars(strip_tags($this->cid));
+        $this->cname=htmlspecialchars(strip_tags($this->cname));
+        $this->cduration=htmlspecialchars(strip_tags($this->cduration));
+    // bind values
+        $stmt->bindParam(":cid", $this->cid);
+        $stmt->bindParam(":cname", $this->cname);
+        $stmt->bindParam(":cduration", $this->cduration);
+ 
+    // execute query
+        if($stmt->execute()){
+            return true;
+        }
+ 
+        return false;      
+    }
+    
+    
+    
 
     function delete(){
         // query to delete record
