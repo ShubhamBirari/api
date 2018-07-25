@@ -2,7 +2,7 @@
     if(isset($_POST["student_id"]))
     {
         $output ='';
-        $connect=mysqli_connect("localhost","root","","testing");
+        //$connect=mysqli_connect("localhost","root","","testing");
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
@@ -52,21 +52,93 @@
         $output .="</table></div>";
         echo $output;
     }
-    
+
     if(isset($_POST["delete_data"]))
     {
         $output ='';
-        $connect=mysqli_connect("localhost","root","","testing");
-        $query="DELETE FROM tbl_employee WHERE id='".$_POST["delete_data"]."'" ;
-        $result=mysqli_query($connect,$query);
-        
-         $output .='
-                    <div class="table-responsive">.
-                    <table class="table table-bordered">';
+        //$connect=mysqli_connect("localhost","root","","testing");
+        //$query="DELETE FROM tbl_employee WHERE id='".$_POST["delete_data"]."'" ;
+        //$result=mysqli_query($connect,$query);
+
+        //set POST variables
+        $url = 'http://localhost/api/students/delete';
+        $data = array(
+            'id' => $_POST["delete_data"]
+        );
+
+        //open connection
+        $ch = curl_init($url);
+
+        $json_data = json_encode($data);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($json_data))
+        );
+
+        // execute post
+        $result = curl_exec($ch);
+
+        echo $result;
+
+        //close connection
+        curl_close($ch);
+            
+        $output .='
+            <div class="table-responsive">.
+            <table class="table table-bordered">';
         
         $output .="</table></div>";
         echo $output;
         
     } 
-    
+
+
+    if(isset($_POST["student_add"]))
+    {
+
+        $output ='';
+        //$connect=mysqli_connect("localhost","root","","testing");
+        //$query="DELETE FROM tbl_employee WHERE id='".$_POST["delete_data"]."'" ;
+        //$result=mysqli_query($connect,$query);
+
+        //set POST variables
+        $url = 'http://localhost/api/students/create';
+        $data = array(
+            'id' => $_POST["student_data"],
+
+        );
+
+        //open connection
+        $ch = curl_init($url);
+
+        $json_data = json_encode($data);
+
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($json_data))
+        );
+
+        // execute post
+        $result = curl_exec($ch);
+
+        echo $result;
+
+        //close connection
+        curl_close($ch);
+            
+        $output .='
+            <div class="table-responsive">.
+            <table class="table table-bordered">';
+        
+        $output .="</table></div>";
+        echo $output;
+
+    }
 ?>

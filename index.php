@@ -33,8 +33,7 @@ $result1=mysqli_query($connect,$query1);
 <!-- Display Student details -->
         <div id="StudentDetails"   class="answer_list" >
             <h3 align="center" size="20px">Student Information</h3>
-            <p> <button class="btn btn-info btn-xs add_student" value="add Student" 
-                onclick="window.location.href='\add_student.php'">ADD STUDENT DETAILS</button></p>
+            <p> <button class="btn btn-info btn-xs add_student" value="add Student">ADD STUDENT</button></p>
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <tr>
@@ -156,9 +155,25 @@ $result1=mysqli_query($connect,$query1);
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">X</button>
-                    <h4>Add Student Details</h4>
+                    <h4>Add Student</h4>
                 </div>
                 <div class="modal-body" id="student_details">
+
+                    <div class='center'>
+                        <form action="" method="post">
+                            <label>Name :</label><input type="text" name="name"><br><br>
+                            <label>Course :</label><br>
+                            <div id='checkboxes'>
+                                <input type="checkbox" name="course[]" value="PHP">PHP<br>
+                                    <input type="checkbox" name="course[]" value="JS"> JS<br>
+                                    <input type="checkbox" name="course[]" value="CSS"> CSS<br>
+                                    <input type="checkbox" name="course[]" value="PYTHON"> PYTHON<br>
+                            </div>
+                            <br>
+                            <input type="submit" value="Submit" id="<?php   echo $row["id"]; ?>">
+                        </form> 
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">SAVE</button>
@@ -237,24 +252,24 @@ $(document).ready(function(data){
     });
 });
     
-    /*
-     //Pop-up Add student details
+
+//Pop-up Add student details
 $(document).ready(function(){
     $('.add_student').click(function(){
-        //var student_id = $(this).attr("id");
+        var student_add = $(this).attr("id");
         
         $.ajax({
             url : "select.php",
             method : "post",
-            data : {student_id:student_id},
+            data : {student_add:student_add},
             success: function(data){
                 $('#student_details').html(data);
-                $('#dataModal').modal("show");
+                $('#dataModal2').modal("show");
             }
         }); 
         
     });
     
 });
-*/
+
 </script>
