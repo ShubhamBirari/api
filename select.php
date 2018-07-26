@@ -101,17 +101,21 @@
     {
 
         $output ='';
-        //$connect=mysqli_connect("localhost","root","","testing");
-        //$query="DELETE FROM tbl_employee WHERE id='".$_POST["delete_data"]."'" ;
-        //$result=mysqli_query($connect,$query);
+        $Name = $_POST['name'];
+        $Course = $_POST['course'];
+        $selected = "";
+        foreach ($_POST['course'] as $service) 
+        {
+            $selected = $selected.$service." ";
+        }
 
-        //set POST variables
         $url = 'http://localhost/api/students/create';
         $data = array(
-            'id' => $_POST["student_data"],
+            'name' => $Name,
+            'course' => $Course
 
         );
-
+        echo $Name;
         //open connection
         $ch = curl_init($url);
 

@@ -33,7 +33,9 @@ $result1=mysqli_query($connect,$query1);
 <!-- Display Student details -->
         <div id="StudentDetails"   class="answer_list" >
             <h3 align="center" size="20px">Student Information</h3>
-            <p> <button class="btn btn-info btn-xs add_student" value="add Student">ADD STUDENT</button></p>
+            <p> 
+                <button type="button" name="add" id="add" data-toggle="modal" data-target="#dataModal2" class="btn btn-info btn-xs add_student" value="add Student">ADD STUDENT</button></p>
+
             <div class="table-responsive">
                 <table class="table table-bordered">
                     <tr>
@@ -160,7 +162,7 @@ $result1=mysqli_query($connect,$query1);
                 <div class="modal-body" id="student_details">
 
                     <div class='center'>
-                        <form action="" method="post">
+                        <form method="post" id="insert_form">
                             <label>Name :</label><input type="text" name="name"><br><br>
                             <label>Course :</label><br>
                             <div id='checkboxes'>
@@ -170,13 +172,13 @@ $result1=mysqli_query($connect,$query1);
                                     <input type="checkbox" name="course[]" value="PYTHON"> PYTHON<br>
                             </div>
                             <br>
-                            <input type="submit" value="Submit" id="<?php   echo $row["id"]; ?>">
+                            <input type="submit" name="insert" id="insert" value="Insert" class="btn btn-success" /> 
                         </form> 
                     </div>
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">SAVE</button>
+                    <button type="button" class="btn btn-default" onclick="showDiv3()" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
@@ -210,10 +212,7 @@ function reset() {
    document.getElementById('StudentDetails').style.display = "none";
    document.getElementById('CourseDetails').style.display = "none";
 }
-    //Reload after deleting student details
-function myFunction() {
-    
-}
+
      //Pop-up Studentdetails
 $(document).ready(function(){
     $('.view_data').click(function(){
@@ -255,7 +254,11 @@ $(document).ready(function(data){
 
 //Pop-up Add student details
 $(document).ready(function(){
-    $('.add_student').click(function(){
+    $('#add').click(function(){  
+           $('#insert').val("Insert");  
+           $('#insert_form')[0].reset();  
+      });  
+    /*$('.add_student').click(function(){
         var student_add = $(this).attr("id");
         
         $.ajax({
@@ -268,7 +271,26 @@ $(document).ready(function(){
             }
         }); 
         
-    });
+    });*/
+
+    $('#insert_form').on("submit", function(event){  
+           event.preventDefault();  
+             
+            $.ajax({  
+                 url:"select.php",  
+                 method:"post",  
+                 data:$('#insert_form').serialize(),  
+                 beforeSend:function(){  
+                      $('#insert').val("Inserting");  
+                 },  
+                 success:function(data){  
+                      $('#insert_form')[0].reset();  
+                      $('#dataModal2').modal('hide');  
+                      $('#employee_table').html(data);  
+                 }  
+            });  
+             
+      });
     
 });
 
