@@ -5,6 +5,9 @@
 </head>
 <body>
     
+    
+    
+    
     <div class='center'>
     <form method='POST' action="">
     
@@ -29,7 +32,7 @@
 		if (!$db) {
 		    die("Connection failed: " . mysqli_connect_error());
 		}
-		echo "Connected successfully";
+		//echo "Connected successfully";
         
         //$result;
         if($_SERVER["REQUEST_METHOD"] == "POST"){
@@ -55,10 +58,11 @@
         
             if($count == 1){
                 $_SESSION['username'] = $username;
+                $db->close();
                 header("location: index.php");
             }else{
 
-                echo '<script>alert("Incorret username or password");</script>';    
+                echo '<script>alert("Invalid credentials!");</script>';    
 
             }   
         }  
