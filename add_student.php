@@ -9,40 +9,58 @@
 <body>
     <div class='center'>
 	<form action="" method="post">
-        <label>Name :</label><input type="text" name="name"><br><br>
+        <label>Name :</label><input type="text" name="name" id="name"><br><br>
     <label>Course :</label><br>
         <div id='checkboxes'>
-            <input type="checkbox" name="course[]" value="PHP">PHP<br>
+            <input type="checkbox" name="course[]"  value="PHP">PHP<br>
 		  		<input type="checkbox" name="course[]" value="JS"> JS<br>
 		  		<input type="checkbox" name="course[]" value="CSS"> CSS<br>
 		  		<input type="checkbox" name="course[]" value="PYTHON"> PYTHON<br>
         </div>
         <br>
-		<input type="submit" value="Submit">
+		<input type="submit" value="Submit" name="submit">
 	</form>	
     </div>
 	
 </body>
 </html>
 <?php
-$connect=mysqli_connect("localhost","root","","testing");
+    if(isset($_POST['submit'])){
+        $Name = $_POST['name'];
+        $Course = $_POST['course'];
+        $selected = "";
+        foreach ($_POST['course'] as $service) 
+        {
+            $selected = $selected.$service." ";
+        }
 
+        $url = 'http://localhost/api/students/create';
+        $data = array(
+            'name' => $Name,
+            'course' => $Course
 
-    $Name = $_POST['name'];
-    $Course = $_POST['course'];
-    $selected = "";
-    foreach ($_POST['course'] as $service) 
-    {
-        $selected = $selected.$service." ";
-    }
+        );
+        echo $Name;
+        //open connection
+        $ch = curl_init($url);
 
-    $stmt = $connect -> prepare("Insert into tbl_employee(name, course) VALUES (?,?)");
-    $stmt->bind_param("ss", $Name, $selected);
-    $stmt->execute();
+        $json_data = json_encode($data);
 
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+        curl_setopt($ch, CURLOPT_POSTFIELDS, $json_data);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+                'Content-Type: application/json',
+                'Content-Length: ' . strlen($json_data))
+        );
 
-    printf("%d Row inserted.\n", $stmt->affected_rows);
-    $stmt->close();
-    mysqli_close($connect);
-    echo'<script>window.location="\index.php";</script>';
+        // execute post
+        $result = curl_exec($ch);
+
+    echo $result;
+
+    //close connection
+    curl_close($ch);
+}
+            
 ?>

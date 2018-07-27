@@ -34,7 +34,8 @@ $result1=mysqli_query($connect,$query1);
         <div id="StudentDetails"   class="answer_list" >
             <h3 align="center" size="20px">Student Information</h3>
             <p> 
-                <button type="button" name="add" id="add" data-toggle="modal" data-target="#dataModal2" class="btn btn-info btn-xs add_student" value="add Student">ADD STUDENT</button></p>
+                <button class="btn btn-info btn-xs add_student" value="add Student" 
+                onclick="window.location.href='\add_student.php'">ADD STUDENT</button></p>
 
             <div class="table-responsive">
                 <table class="table table-bordered">
@@ -152,7 +153,7 @@ $result1=mysqli_query($connect,$query1);
     </div>
 
 <!-- Display Pop-Up on Add Student Button -->
-    <div id="dataModal2" class="modal fade">
+<!-- <div id="dataModal2" class="modal fade">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -182,7 +183,7 @@ $result1=mysqli_query($connect,$query1);
                 </div>
             </div>
         </div>
-    </div>
+    </div>-->
 <script>
     //onclick() show student details
 function showDiv() {
@@ -253,7 +254,7 @@ $(document).ready(function(data){
     
 
 //Pop-up Add student details
-$(document).ready(function(){
+/*$(document).ready(function(){
     $('#add').click(function(){  
            $('#insert').val("Insert");  
            $('#insert_form')[0].reset();  
@@ -271,7 +272,7 @@ $(document).ready(function(){
             }
         }); 
         
-    });*/
+    });
 
     $('#insert_form').on("submit", function(event){  
            event.preventDefault();  
@@ -292,6 +293,6 @@ $(document).ready(function(){
              
       });
     
-});
+});*/
 
 </script>

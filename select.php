@@ -97,7 +97,7 @@
     } 
 
 
-    if(isset($_POST["student_add"]))
+    /*if(isset($_POST["student_add"]))
     {
 
         $output ='';
@@ -144,5 +144,5 @@
         $output .="</table></div>";
         echo $output;
 
-    }
+    }*/
 ?>
